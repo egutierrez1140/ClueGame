@@ -5,6 +5,10 @@ public class BoardCell {
 	private int column;
 	private char initial;
 	
+	boolean walkway;
+	boolean room;
+	boolean doorway;
+	
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;

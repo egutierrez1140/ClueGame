@@ -27,6 +27,7 @@ public class Board {
 		
 	}
 	
+	// initialize() will call loadRoomConfig() and loadBoardConfig()
 	public void initialize() {
 		
 	}

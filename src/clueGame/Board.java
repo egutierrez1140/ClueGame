@@ -20,16 +20,19 @@ public class Board {
 	String roomConfigFile;
 	
 	public Board() {
-		
+		this.boardConfigFile = "ClueLayout.csv";
+		this.roomConfigFile = "ClueLegend.txt";
 	}
 	
 	public Board(String boardFileName, String roomFileName) {
-		
+		this.boardConfigFile = boardFileName;
+		this.roomConfigFile = roomFileName;
 	}
 	
 	// initialize() will call loadRoomConfig() and loadBoardConfig()
 	public void initialize() {
-		
+		loadRoomConfig();
+		loadBoardConfig();
 	}
 	
 	public void loadRoomConfig() {

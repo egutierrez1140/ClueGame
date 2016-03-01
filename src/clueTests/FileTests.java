@@ -27,7 +27,7 @@ public class FileTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		board = new Board();
+		board = new Board("ourClueLayout.csv", "ourClueLegend.txt");
 		board.initialize();
 	}	
 
@@ -123,14 +123,14 @@ public class FileTests {
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
-		Board board = new Board("ourClueLayoutBadRoom.csv", "ClueLegend.txt");
+		Board board = new Board("ourClueLayoutBadRoom.csv", "ourClueLegend.txt");
 		board.loadRoomConfig();
 		board.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
-		Board board = new Board("ClueLayout.csv", "ourClueLegendBadFormat.txt");
+		Board board = new Board("ourClueLayout.csv", "ourClueLegendBadFormat.txt");
 		board.loadRoomConfig();
 	}
 }

@@ -1,9 +1,15 @@
 package clueGame;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Board {
@@ -34,16 +40,37 @@ public class Board {
 		board = new BoardCell[BOARD_SIZE][BOARD_SIZE];
 		rooms = new HashMap<Character, String>();
 		targets = new HashSet<BoardCell>();
-		loadRoomConfig();
+		try {
+			loadRoomConfig();
+		}
+		catch (BadConfigFormatException b) {
+			System.out.println("BadConfigFormatException");
+		}
+		
+		
 		loadBoardConfig();
 	}
 	
-	public void loadRoomConfig() {
+	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+		FileReader reader = new FileReader(roomConfigFile);
+		Scanner scanner = new Scanner(reader);
+		while (scanner.hasNextLine()) {
+			String next = scanner.nextLine();
+			
+		}
 		
 	}
 	
 	public void loadBoardConfig() {
-		
+		Scanner scanner = new Scanner(boardConfigFile);
+		scanner.useDelimiter(",");
+		int x = 0;
+		int y = 0;
+		while (scanner.hasNext()) {
+			String next = scanner.next();
+			System.out.print(next);
+		}
+		scanner.close();
 	}
 	
 	public void calcAdjacencies() {

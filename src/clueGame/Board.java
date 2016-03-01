@@ -46,9 +46,16 @@ public class Board {
 		catch (BadConfigFormatException b) {
 			System.out.println("BadConfigFormatException");
 		}
+		catch (FileNotFoundException f) {
+			System.out.println("FileNotFoundException");
+		}
 		
 		
-		loadBoardConfig();
+		try {
+			loadBoardConfig();
+		} catch (FileNotFoundException | BadConfigFormatException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -56,19 +63,29 @@ public class Board {
 		Scanner scanner = new Scanner(reader);
 		while (scanner.hasNextLine()) {
 			String next = scanner.nextLine();
-			
+			String[] parts = next.split(",");
+			rooms.put(parts[0].charAt(0), parts[1]);
 		}
+		scanner.close();
 		
 	}
 	
-	public void loadBoardConfig() {
-		Scanner scanner = new Scanner(boardConfigFile);
-		scanner.useDelimiter(",");
-		int x = 0;
-		int y = 0;
-		while (scanner.hasNext()) {
-			String next = scanner.next();
-			System.out.print(next);
+	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
+		FileReader reader = new FileReader(boardConfigFile);
+		Scanner scanner = new Scanner(reader);
+		int x = 0; int y = 0;
+		while (scanner.hasNextLine()) {
+			String next = scanner.nextLine();
+			String[] parts = next.split(",");
+			
+			for (String p: parts) {
+				//System.out.println(p.charAt(0));
+				//System.out.println("Cell: " + x + ", " + y);
+				board[x][y] = new BoardCell(x, y, p.charAt(0));
+				x++;
+			}
+			x = 0;
+			y++;
 		}
 		scanner.close();
 	}

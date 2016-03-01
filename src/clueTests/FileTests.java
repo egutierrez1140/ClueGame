@@ -119,14 +119,14 @@ public class FileTests {
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		Board board = new Board("ourClueLayoutBadColumns.csv", "ourClueLegend.txt");
 		board.loadRoomConfig();
-		board.loadBoardConfig();
+		//board.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		Board board = new Board("ourClueLayoutBadRoom.csv", "ourClueLegend.txt");
 		board.loadRoomConfig();
-		board.loadBoardConfig();
+		//board.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)

@@ -9,10 +9,10 @@ import java.util.Set;
 public class Board {
 	private int numRows;
 	private int numColumns;
-	public static int BOARD_SIZE;
+	public static int BOARD_SIZE = 50;
 	
 	BoardCell[][] board;
-	Map<Character, String> rooms;
+	static Map<Character, String> rooms;
 	
 	Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
 	Set<BoardCell> targets;
@@ -31,6 +31,9 @@ public class Board {
 	
 	// initialize() will call loadRoomConfig() and loadBoardConfig()
 	public void initialize() {
+		board = new BoardCell[BOARD_SIZE][BOARD_SIZE];
+		rooms = new HashMap<Character, String>();
+		targets = new HashSet<BoardCell>();
 		loadRoomConfig();
 		loadBoardConfig();
 	}
@@ -45,6 +48,27 @@ public class Board {
 	
 	public void calcAdjacencies() {
 		
+		for (int i = 0; i < numColumns; ++i) {
+			for (int j = 0; j < numRows; ++j) {
+				BoardCell currentCell = getCellAt(i, j);
+				LinkedList<BoardCell> currentAdjacentCells = new LinkedList<BoardCell>();
+				if (i < numColumns - 1) {
+					currentAdjacentCells.add(getCellAt(i + 1, j));
+				}
+				if (i > 0) {
+					currentAdjacentCells.add(getCellAt(i - 1, j));
+				}
+				if (j < numRows - 1) {
+					currentAdjacentCells.add(getCellAt(i, j + 1));
+				}
+				if (j > 0) {
+					currentAdjacentCells.add(getCellAt(i, j - 1));
+				}
+				
+				adjMatrix.put(currentCell, currentAdjacentCells);
+			}
+			
+		}
 	}
 	
 	public void calcTargets(BoardCell cell, int pathLength) {
@@ -52,11 +76,11 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int row, int column) {
-		return new LinkedList<BoardCell>();
+		return adjMatrix.get(getCellAt(column, row));
 	}
 	
 	public BoardCell getCellAt(int row, int column) {
-		return new BoardCell(0,0);
+		return board[column][row];
 	}
 	
 	public void calcTargets(int row, int column, int steps) {
@@ -64,19 +88,19 @@ public class Board {
 	}
 	
 	public Set<BoardCell> getTargets() {
-		return new HashSet<BoardCell>();
+		return targets;
 	}
 	
 	public static Map<Character, String> getRooms() {
-		return new HashMap<Character, String>();
+		return rooms;
 	}
 
 	public int getNumRows() {
-		return 0;
+		return numRows;
 	}
 
 	public int getNumColumns() {
-		return 0;
+		return numColumns;
 	}
 	
 }

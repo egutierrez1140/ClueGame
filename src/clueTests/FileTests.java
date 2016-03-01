@@ -35,6 +35,7 @@ public class FileTests {
 	@Test
 	public void testRooms() {
 		Map<Character, String> rooms = Board.getRooms();
+		//System.out.println(rooms);
 		assertEquals(NUM_ROOMS, rooms.size());
 		assertEquals("Billiards Room", rooms.get('B'));
 		assertEquals("Foyer", rooms.get('F'));
@@ -45,7 +46,7 @@ public class FileTests {
 		assertEquals("Observatory", rooms.get('O'));
 		assertEquals("Theater", rooms.get('T'));
 		assertEquals("Aquarium", rooms.get('A'));
-		assertEquals("Closet", rooms.get('C'));
+		assertEquals("Closet", rooms.get('X'));
 		assertEquals("Walkway", rooms.get('W'));
 	}
 

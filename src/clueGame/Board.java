@@ -60,11 +60,15 @@ public class Board {
 	
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(roomConfigFile);
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(reader);
 		while (scanner.hasNextLine()) {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
-			rooms.put(parts[0].charAt(0), parts[1]);
+			if (parts.length > 3) {
+				throw new BadConfigFormatException();
+			}
+			rooms.put(parts[0].charAt(0), parts[1].substring(1));
 		}
 		scanner.close();
 		
@@ -78,14 +82,18 @@ public class Board {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
 			
+			
+			
 			for (String p: parts) {
 				//System.out.println(p.charAt(0));
 				//System.out.println("Cell: " + x + ", " + y);
 				board[x][y] = new BoardCell(x, y, p.charAt(0));
+				System.out.println("Cell(" + x + "," + y + ") = " + this.getCellAt(x,y));
 				x++;
 			}
 			x = 0;
 			y++;
+			
 		}
 		scanner.close();
 	}

@@ -65,13 +65,12 @@ public class Board {
 		while (scanner.hasNextLine()) {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
-			if (parts.length > 3) {
+			if (parts.length != 3) {
 				throw new BadConfigFormatException();
 			}
 			rooms.put(parts[0].charAt(0), parts[1].substring(1));
 		}
 		scanner.close();
-		
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -82,8 +81,6 @@ public class Board {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
 			
-			
-			
 			for (String p: parts) {
 				//System.out.println(p.charAt(0));
 				//System.out.println("Cell: " + x + ", " + y);
@@ -93,7 +90,6 @@ public class Board {
 			}
 			x = 0;
 			y++;
-			
 		}
 		scanner.close();
 	}

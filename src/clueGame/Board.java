@@ -37,7 +37,6 @@ public class Board {
 	
 	// initialize() will call loadRoomConfig() and loadBoardConfig()
 	public void initialize() {
-		board = new BoardCell[BOARD_SIZE][BOARD_SIZE];
 		rooms = new HashMap<Character, String>();
 		targets = new HashSet<BoardCell>();
 		try {
@@ -50,10 +49,10 @@ public class Board {
 			System.out.println("FileNotFoundException");
 		}
 		
-		
 		try {
 			loadBoardConfig();
-		} catch (FileNotFoundException | BadConfigFormatException e) {
+		}
+		catch (FileNotFoundException | BadConfigFormatException e) {
 			e.printStackTrace();
 		}
 	}
@@ -65,15 +64,18 @@ public class Board {
 		while (scanner.hasNextLine()) {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
+			
 			if (parts.length != 3) {
 				throw new BadConfigFormatException();
 			}
+			
 			rooms.put(parts[0].charAt(0), parts[1].substring(1));
 		}
 		scanner.close();
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
+		board = new BoardCell[BOARD_SIZE][BOARD_SIZE];
 		numColumns = 0;
 		numRows = 0;
 		FileReader reader = new FileReader(boardConfigFile);
@@ -89,7 +91,12 @@ public class Board {
 			for (int i = 0; i < parts.length; ++i) {
 				//System.out.println(parts[i].charAt(0));
 				//System.out.println("Cell: " + x + ", " + y);
-				if (parts[i] == null) {throw new BadConfigFormatException();}
+				//System.out.println("r = " + r + ", c = " + c);
+				
+				if (!rooms.containsKey(parts[i].charAt(0))) {
+					throw new BadConfigFormatException();
+				}
+				
 				board[r][c] = new BoardCell(r, c, parts[i].charAt(0));
 				if (parts[i].length() > 1 && parts[i].charAt(1) != 'N') {
 					board[r][c].setDoorway(true);
@@ -106,8 +113,7 @@ public class Board {
 						board[r][c].setDoorDirection(DoorDirection.RIGHT);
 					}
 				}
-				
-				System.out.println("Cell(" + c + "," + r + ") = " + this.getCellAt(c,r));
+				//System.out.println("Cell(" + r + "," + c + ") = " + this.getCellAt(r,c));
 				c++;
 			}
 			c = 0;

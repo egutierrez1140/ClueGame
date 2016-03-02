@@ -60,24 +60,24 @@ public class FileTests {
 	public void testDoorDirections() {
 		// Test door directions
 			// up
-		BoardCell room = board.getCellAt(13, 17);
+		BoardCell room = board.getCellAt(17, 13);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
 			// down
-		room = board.getCellAt(11, 4);
+		room = board.getCellAt(4, 11);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
 			// left
-		room = board.getCellAt(16, 10);
+		room = board.getCellAt(10, 16);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
 			// right
-		room = board.getCellAt(6, 10);
+		room = board.getCellAt(10, 6);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
 
 		// Test non-door rooms
-		room = board.getCellAt(3, 8);
+		room = board.getCellAt(8, 3);
 		assertFalse(room.isDoorway());	
 		// Test non-door walkways
 		BoardCell cell = board.getCellAt(16, 16);
@@ -100,18 +100,18 @@ public class FileTests {
 		Assert.assertEquals(13, numDoors);
 	}
 	
-	@Test // TODO: FLIP FLOP COORDINATES
+	@Test
 	public void testRoomInitials() {
 		assertEquals('B', board.getCellAt(1, 1).getInitial());
-		assertEquals('F', board.getCellAt(10, 2).getInitial());
-		assertEquals('S', board.getCellAt(18, 2).getInitial());
-		assertEquals('D', board.getCellAt(17, 12).getInitial());
+		assertEquals('F', board.getCellAt(2, 10).getInitial());
+		assertEquals('S', board.getCellAt(2, 18).getInitial());
+		assertEquals('D', board.getCellAt(12, 17).getInitial());
 		assertEquals('K', board.getCellAt(20, 20).getInitial());
-		assertEquals('L', board.getCellAt(12, 19).getInitial());
-		assertEquals('O', board.getCellAt(7, 18).getInitial());
-		assertEquals('T', board.getCellAt(2, 21).getInitial());
-		assertEquals('A', board.getCellAt(3, 11).getInitial());
-		assertEquals('X', board.getCellAt(11, 10).getInitial());
+		assertEquals('L', board.getCellAt(19, 12).getInitial());
+		assertEquals('O', board.getCellAt(18, 7).getInitial());
+		assertEquals('T', board.getCellAt(21, 2).getInitial());
+		assertEquals('A', board.getCellAt(11, 3).getInitial());
+		assertEquals('X', board.getCellAt(10, 11).getInitial());
 		assertEquals('W', board.getCellAt(8, 8).getInitial());
 	}
 	
@@ -120,14 +120,14 @@ public class FileTests {
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		Board board = new Board("ourClueLayoutBadColumns.csv", "ourClueLegend.txt");
 		board.loadRoomConfig();
-		//board.loadBoardConfig();
+		board.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		Board board = new Board("ourClueLayoutBadRoom.csv", "ourClueLegend.txt");
 		board.loadRoomConfig();
-		//board.loadBoardConfig();
+		board.loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)

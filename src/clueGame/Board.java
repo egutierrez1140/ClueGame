@@ -39,6 +39,8 @@ public class Board {
 	public void initialize() {
 		rooms = new HashMap<Character, String>();
 		targets = new HashSet<BoardCell>();
+		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
+		
 		try {
 			loadRoomConfig();
 		}
@@ -55,6 +57,8 @@ public class Board {
 		catch (FileNotFoundException | BadConfigFormatException e) {
 			e.printStackTrace();
 		}
+		
+		calcAdjacencies();
 	}
 	
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -98,6 +102,13 @@ public class Board {
 				}
 				
 				board[r][c] = new BoardCell(r, c, parts[i].charAt(0));
+				if (Character.toString(parts[i].charAt(0)).equals("W")) {
+					board[r][c].setWalkway(true);
+				}
+				else {
+					board[r][c].setRoom(true);
+				}
+				
 				if (parts[i].length() > 1 && parts[i].charAt(1) != 'N') {
 					board[r][c].setDoorway(true);
 					if (parts[i].charAt(1) == 'U') {
@@ -125,26 +136,41 @@ public class Board {
 	
 	public void calcAdjacencies() {
 		
-		for (int i = 0; i < numColumns; ++i) {
-			for (int j = 0; j < numRows; ++j) {
+		for (int i = 0; i < numRows; ++i) {
+			for (int j = 0; j < numColumns; ++j) {
+				
 				BoardCell currentCell = getCellAt(i, j);
 				LinkedList<BoardCell> currentAdjacentCells = new LinkedList<BoardCell>();
-				if (i < numColumns - 1) {
-					currentAdjacentCells.add(getCellAt(i + 1, j));
+				//System.out.println(currentCell.isWalkway());
+				//System.out.println(currentCell.isDoorway());
+				
+				if (i < numRows - 1) {
+					BoardCell downCell = getCellAt(i + 1, j);
+					if ((!currentCell.isRoom() || currentCell.isDoorway()) && downCell.isWalkway() || (downCell.isDoorway() && !currentCell.isDoorway() && downCell.getDoorDirection().equals(DoorDirection.UP))) {
+						currentAdjacentCells.add(getCellAt(i + 1, j));
+					}
 				}
 				if (i > 0) {
-					currentAdjacentCells.add(getCellAt(i - 1, j));
+					BoardCell upCell = getCellAt(i - 1, j);
+					if ((!currentCell.isRoom() || currentCell.isDoorway()) && upCell.isWalkway() || (upCell.isDoorway() && !currentCell.isDoorway() && upCell.getDoorDirection().equals(DoorDirection.DOWN))) {
+						currentAdjacentCells.add(getCellAt(i - 1, j));
+					}
 				}
-				if (j < numRows - 1) {
-					currentAdjacentCells.add(getCellAt(i, j + 1));
+				if (j < numColumns - 1) {
+					BoardCell rightCell = getCellAt(i, j + 1);
+					if ((!currentCell.isRoom() || currentCell.isDoorway()) && rightCell.isWalkway() || (rightCell.isDoorway() && !currentCell.isDoorway() && rightCell.getDoorDirection().equals(DoorDirection.LEFT))) {
+						currentAdjacentCells.add(getCellAt(i, j + 1));
+					}
 				}
 				if (j > 0) {
-					currentAdjacentCells.add(getCellAt(i, j - 1));
+					BoardCell leftCell = getCellAt(i, j - 1);
+					if ((!currentCell.isRoom() || currentCell.isDoorway()) && leftCell.isWalkway() || (leftCell.isDoorway() && !currentCell.isDoorway() && leftCell.getDoorDirection().equals(DoorDirection.RIGHT))) {
+						currentAdjacentCells.add(getCellAt(i, j - 1));
+					}
 				}
 				
 				adjMatrix.put(currentCell, currentAdjacentCells);
 			}
-			
 		}
 	}
 	
@@ -153,7 +179,7 @@ public class Board {
 	}
 	
 	public LinkedList<BoardCell> getAdjList(int row, int column) {
-		return adjMatrix.get(getCellAt(column, row));
+		return adjMatrix.get(getCellAt(row, column));
 	}
 	
 	public BoardCell getCellAt(int row, int column) {

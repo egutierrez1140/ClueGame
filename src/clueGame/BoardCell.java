@@ -6,10 +6,15 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection doorDirection;
 	
-	boolean walkway;
-	boolean room;
-	boolean doorway;
+	boolean walkway = false;
+	boolean room = false;
+	boolean doorway = false;
 	
+	@Override
+	public String toString() {
+		return "BoardCell [row=" + row + ", column=" + column + "]" + initial;
+	}
+
 	public void setDoorDirection(DoorDirection doorDirection) {
 		this.doorDirection = doorDirection;
 	}

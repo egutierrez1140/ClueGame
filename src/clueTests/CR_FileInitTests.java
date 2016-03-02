@@ -124,7 +124,6 @@ public class CR_FileInitTests {
 		// Instead of initialize, we call the two load functions directly
 		board.loadRoomConfig();
 		// This one should throw an exception
-		System.out.println("Right before loadBoard");
 		board.loadBoardConfig();
 	}
 	// Test that an exception is thrown for a bad config file

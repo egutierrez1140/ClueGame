@@ -1,10 +1,7 @@
 package clueGame;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,6 +18,7 @@ public class Board {
 	static Map<Character, String> rooms;
 	
 	Map<BoardCell, LinkedList<BoardCell>> adjMatrix;
+	private Set<BoardCell> visited;
 	Set<BoardCell> targets;
 	String boardConfigFile;
 	String roomConfigFile;
@@ -38,6 +36,7 @@ public class Board {
 	// initialize() will call loadRoomConfig() and loadBoardConfig()
 	public void initialize() {
 		rooms = new HashMap<Character, String>();
+		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
 		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		
@@ -174,10 +173,6 @@ public class Board {
 		}
 	}
 	
-	public void calcTargets(BoardCell cell, int pathLength) {
-		
-	}
-	
 	public LinkedList<BoardCell> getAdjList(int row, int column) {
 		return adjMatrix.get(getCellAt(row, column));
 	}
@@ -187,7 +182,36 @@ public class Board {
 	}
 	
 	public void calcTargets(int row, int column, int steps) {
-		
+		targets.clear();
+		findTargets(row, column, steps);
+	}
+	
+	public void findTargets(int row, int column, int steps) {
+		BoardCell startCell = getCellAt(row, column);
+		visited.add(startCell);
+		findAllTargets(startCell, steps);
+		visited.remove(startCell);
+	}
+	
+	public void findAllTargets(BoardCell startCell, int pathLength) {
+		// Get cells adjacent to the current one
+		LinkedList<BoardCell> adjCells = new LinkedList<BoardCell>(getAdjList(startCell.getRow(), startCell.getColumn()));
+		for (BoardCell c: visited) {
+			if (adjCells.contains(c)) {
+				adjCells.remove(c);
+			}
+		}
+				
+		for (BoardCell c: adjCells) {
+			visited.add(c);
+			if (pathLength == 1 || c.isDoorway()) { // added doorway
+				targets.add(c);
+			}
+			else {
+				findTargets(c.getRow(), c.getColumn(), pathLength - 1);
+			}
+			visited.remove(c);
+		}
 	}
 	
 	public Set<BoardCell> getTargets() {

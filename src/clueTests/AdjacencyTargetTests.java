@@ -23,7 +23,7 @@ public class AdjacencyTargetTests {
 	
 	// Adjacency tests
 	@Test
-	public void testOnlyWalkways() {
+	public void testOnlyWalkways() { // DARK GREEN on spreadsheet
 		LinkedList<BoardCell> testList = board.getAdjList(1, 6);
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCellAt(0, 6)));
@@ -46,7 +46,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testEdges() {
+	public void testEdges() { // PURPLE on spreadsheet
 		LinkedList<BoardCell> testList = board.getAdjList(5, 0);
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCellAt(4, 0)));
@@ -66,7 +66,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testBesideRoomNotDoorway() {
+	public void testBesideRoomNotDoorway() { // RED on spreadsheet
 		LinkedList<BoardCell> testList = board.getAdjList(15, 2);
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCellAt(16, 2)));
@@ -80,7 +80,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testDoorwayWithNeededDirection() {
+	public void testDoorwayWithNeededDirection() { // DARK BLUE on spreadsheet
 		LinkedList<BoardCell> testList = board.getAdjList(5, 10);
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCellAt(4, 10)));
@@ -111,7 +111,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testAtDoorways() {
+	public void testAtDoorways() { // BROWN on spreadsheet
 		LinkedList<BoardCell> testList = board.getAdjList(18, 3);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(18, 4)));
@@ -123,7 +123,7 @@ public class AdjacencyTargetTests {
 	
 	// Target tests
 	@Test
-	public void testWalkways() {
+	public void testWalkways() { // BLACK on spreadsheet
 		board.calcTargets(5, 20, 3);
 		Set<BoardCell> testTargets = board.getTargets();
 		assertEquals(7, testTargets.size());
@@ -167,7 +167,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testEnterRoom() {
+	public void testEnterRoom() { // PINK on spreadsheet
 		board.calcTargets(10, 8, 3);
 		Set<BoardCell> testTargets = board.getTargets();
 		assertEquals(12, testTargets.size());
@@ -199,7 +199,7 @@ public class AdjacencyTargetTests {
 	}
 	
 	@Test
-	public void testLeaveRoom() {
+	public void testLeaveRoom() { // LIGHT GREEN on spreadsheet
 		board.calcTargets(4, 12, 3);
 		Set<BoardCell> testTargets = board.getTargets();
 		assertEquals(6, testTargets.size());

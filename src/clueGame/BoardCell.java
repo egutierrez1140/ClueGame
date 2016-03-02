@@ -10,6 +10,22 @@ public class BoardCell {
 	boolean room;
 	boolean doorway;
 	
+	public void setDoorDirection(DoorDirection doorDirection) {
+		this.doorDirection = doorDirection;
+	}
+
+	public void setWalkway(boolean walkway) {
+		this.walkway = walkway;
+	}
+
+	public void setRoom(boolean room) {
+		this.room = room;
+	}
+
+	public void setDoorway(boolean doorway) {
+		this.doorway = doorway;
+	}
+	
 	public BoardCell(int row, int column, char i) {
 		this.row = row;
 		this.column = column;
@@ -29,7 +45,7 @@ public class BoardCell {
 	}
 	
 	public DoorDirection getDoorDirection() {
-		return null;
+		return doorDirection;
 	}
 	
 	public char getInitial() {

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,10 +28,10 @@ public class CR_FileInitTests {
 	// time (using @BeforeClass), no need to do setup before each test.
 	// The methods that test invalid config files will have a local 
 	// Board variable, so will not use this
-	private static Board board;
+	private Board board;
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		// Create a new Board using the valid files. Note that
 		// the default filenames must be attributes of the Board class. 
 		board = new Board();
@@ -123,6 +124,7 @@ public class CR_FileInitTests {
 		// Instead of initialize, we call the two load functions directly
 		board.loadRoomConfig();
 		// This one should throw an exception
+		System.out.println("Right before loadBoard");
 		board.loadBoardConfig();
 	}
 	// Test that an exception is thrown for a bad config file

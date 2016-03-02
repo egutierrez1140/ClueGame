@@ -74,22 +74,45 @@ public class Board {
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
+		numColumns = 0;
+		numRows = 0;
 		FileReader reader = new FileReader(boardConfigFile);
 		Scanner scanner = new Scanner(reader);
-		int x = 0; int y = 0;
+		int r = 0; int c = 0;
 		while (scanner.hasNextLine()) {
 			String next = scanner.nextLine();
 			String[] parts = next.split(",");
 			
-			for (String p: parts) {
-				//System.out.println(p.charAt(0));
+			if (numColumns == 0) {numColumns = parts.length;}
+			else if (numColumns != parts.length) { throw new BadConfigFormatException();}
+			
+			for (int i = 0; i < parts.length; ++i) {
+				//System.out.println(parts[i].charAt(0));
 				//System.out.println("Cell: " + x + ", " + y);
-				board[x][y] = new BoardCell(x, y, p.charAt(0));
-				System.out.println("Cell(" + x + "," + y + ") = " + this.getCellAt(x,y));
-				x++;
+				if (parts[i] == null) {throw new BadConfigFormatException();}
+				board[r][c] = new BoardCell(r, c, parts[i].charAt(0));
+				if (parts[i].length() > 1 && parts[i].charAt(1) != 'N') {
+					board[r][c].setDoorway(true);
+					if (parts[i].charAt(1) == 'U') {
+						board[r][c].setDoorDirection(DoorDirection.UP);
+					}
+					if (parts[i].charAt(1) == 'D') {
+						board[r][c].setDoorDirection(DoorDirection.DOWN);
+					}
+					if (parts[i].charAt(1) == 'L') {
+						board[r][c].setDoorDirection(DoorDirection.LEFT);
+					}
+					if (parts[i].charAt(1) == 'R') {
+						board[r][c].setDoorDirection(DoorDirection.RIGHT);
+					}
+				}
+				
+				System.out.println("Cell(" + c + "," + r + ") = " + this.getCellAt(c,r));
+				c++;
 			}
-			x = 0;
-			y++;
+			c = 0;
+			r++;
+			numRows++;
 		}
 		scanner.close();
 	}
@@ -128,7 +151,7 @@ public class Board {
 	}
 	
 	public BoardCell getCellAt(int row, int column) {
-		return board[column][row];
+		return board[row][column];
 	}
 	
 	public void calcTargets(int row, int column, int steps) {

@@ -100,7 +100,7 @@ public class FileTests {
 		Assert.assertEquals(13, numDoors);
 	}
 	
-	@Test
+	@Test // TODO: FLIP FLOP COORDINATES
 	public void testRoomInitials() {
 		assertEquals('B', board.getCellAt(1, 1).getInitial());
 		assertEquals('F', board.getCellAt(10, 2).getInitial());

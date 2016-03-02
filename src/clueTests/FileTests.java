@@ -5,12 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import clueGame.BadConfigFormatException;
 import clueGame.Board;

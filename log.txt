@@ -1,0 +1,109 @@
+NOTE: Worked via pair programming
+
+commit c46e7ad2c4395367b3b92f06af3284f6861bd444
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 16:11:05 2016 -0700
+
+    All tests passing; Part III finished
+
+commit 8ec60dd7cfd5926cb0d34e1289411d7a38e5dd58
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 14:33:28 2016 -0700
+
+    EDIT: Now ready to turn in for Part II
+
+commit 9358d294a235d06c8f8c806ef43aad61d055a14d
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 14:24:30 2016 -0700
+
+    Modified to satisfy Part II requirements; Part II finished
+
+commit f301b7b4853e37735e6d493ddce3e35435fc8577
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 10:57:38 2016 -0700
+
+    Fixed minor git mistakes with file tracking
+
+commit 94d5ba0fea9d6b321a358f2bd0f0451106974171
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 10:55:54 2016 -0700
+
+    Target tests pass! Need to make some custom tests
+
+commit c5d5851603b28c55a97143048c0171e65adf07bc
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Wed Mar 2 09:25:13 2016 -0700
+
+    Adjacency tests passing. Only target tests left to pass
+
+commit 6965d98bdae534ec8a2e304921f28c97f4a81e9d
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Tue Mar 1 19:12:49 2016 -0700
+
+    16/24 tests passing! Only adjacenty tests left
+
+commit e5a60482d26824d77b32d91d51bf7cc9741e5341
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Tue Mar 1 17:01:15 2016 -0700
+
+    Heavily modified loading to pass several tests
+
+commit 7e12357241897b3e45a142fc573aa63288d121cf
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Tue Mar 1 14:31:24 2016 -0700
+
+    Cleaned up loading functions
+
+commit ad06faf937108d44050b9e7bc9aa054b2c8e2d36
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Tue Mar 1 14:15:05 2016 -0700
+
+    Modified mapping function to pass mapping test
+
+commit 3bbdad7f5bd841fd25a16145d0a6532b38a1959c
+Author: Jacob Maerli <Jacob Maerli>
+Date:   Tue Mar 1 11:00:28 2016 -0700
+
+    Updated loadBoardConfig() and loadRoomConfig() to read in files
+
+commit 9f6291032c3b6c6cfce8eb8063e5a89a9406a483
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Tue Mar 1 09:28:26 2016 -0700
+
+    First attempt at file reading
+
+commit fa1458d39cf5e7624144fb7c45508cddcc316800
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 19:26:08 2016 -0700
+
+    Added more to functions in Board class
+
+commit 3408b7fbd755fcd611cdec0687450c0b4cf03663
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 18:31:00 2016 -0700
+
+    Updated Board constructor and added CR tests. Slightly modified previous tests
+
+commit 8fda4073025b29078cc51bec940a2db2e97c8225
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 14:52:21 2016 -0700
+
+    Added our tests and the appropriate config files
+
+commit e8af8751bd73f85e8125c8d7004ebf7afe63f337
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 11:04:52 2016 -0700
+
+    Added JUnit library and added our Clue files
+
+commit c322a9ce4e7dbff17c43c939a516897c0eaf66d2
+Author: Edgar Gutierrez <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 10:55:57 2016 -0700
+
+    Added skeleton functions in classes and updated .gitignore
+
+commit 33084874cc02ee92e8148629cabebe223dda2466
+Author: egutierrez1140 <egutierr@mymail.mines.edu>
+Date:   Mon Feb 29 10:42:37 2016 -0700
+
+    Initial commit
